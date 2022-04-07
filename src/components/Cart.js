@@ -17,17 +17,18 @@ export const Cart = () => {
           {carrito.map((item) => {
             return (
               <div className='resaltar2'>
-                <div key={item.product.id}>
+                <div key={item.id}>
                   <h3>{item.product.title}</h3>
                   <p>
-                    {item.product.precio} x {item.product.stock}
+                    {item.product.precio} x {item.contador}
                   </p>
                   <p>Total : ${total}</p>
                   <button
-                    onClick={() => removeItem(item.product.id)}
+                    onClick={() => removeItem(item.id)}
                     className='resaltar2'
                   >
                     <AiFillDelete />
+                    {console.log(carrito)}
                   </button>
                 </div>
               </div>

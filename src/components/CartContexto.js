@@ -10,30 +10,36 @@ const MiProvider = ({ children }) => {
     checkTotal();
   }, [carrito]);
 
-  const addItem = (product, contador) => {
-    let cartProduct = { product, contador };
-    let cartAux = [carrito];
+  const addItem = (product, contador, id) => {
 
-    if (isInCart(product)) {
-      cartProduct = product.find((item) => item.product === product);
+    let cartProduct = {product, contador, id };
+
+    let cartAux = [];
+
+    if (isInCart(id)) {
+
+      cartProduct = carrito.find((item) => item.id === id);
+
       cartProduct.contador = cartProduct.contador + contador;
-      cartAux = [...carrito];
+
+      cartAux = [...cartProduct];
+
     } else {
+
       cartAux = [cartProduct, ...carrito];
+
     }
     setCarrito(cartAux);
   };
 
   const removeItem = (id) => {
-    setCarrito(carrito.filter((item) => item.product.id !== id));
+    setCarrito(carrito.filter((item) => item.id !== id));
   };
   const clearCart = () => {
     setCarrito([]);
   };
-  const isInCart = (product) => {
-    if (carrito) {
-      carrito.some((item) => item.product.id === product.id);
-    }
+  const isInCart = (id) => {
+    return carrito&&carrito.some((item) => item.id === id);
   };
   const checkTotal = () => {
     let totalAux = 0;
